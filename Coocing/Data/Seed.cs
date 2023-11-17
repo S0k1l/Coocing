@@ -12,124 +12,83 @@ namespace Coocing.Data
             {
 
                 //Roles
-                var roleManager = serviceScope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+                //var roleManager = serviceScope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
-                if (!await roleManager.RoleExistsAsync(UserRoles.Admin))
-                    await roleManager.CreateAsync(new IdentityRole(UserRoles.Admin));
-                if (!await roleManager.RoleExistsAsync(UserRoles.User))
-                    await roleManager.CreateAsync(new IdentityRole(UserRoles.User));
+                //if (!await roleManager.RoleExistsAsync(UserRoles.Admin))
+                //    await roleManager.CreateAsync(new IdentityRole(UserRoles.Admin));
+                //if (!await roleManager.RoleExistsAsync(UserRoles.User))
+                //    await roleManager.CreateAsync(new IdentityRole(UserRoles.User));
                 //Users
                 var userManager = serviceScope.ServiceProvider.GetRequiredService<UserManager<AppUser>>();
                 string UserMail = "mymail@email.com";
 
-                var adminUser = await userManager.FindByEmailAsync(UserMail);
-                if (adminUser == null)
-                {
-                    var newAdminUser = new AppUser()
-                    {
-                        UserName = "Yurii",
-                        Email = "123@email.com",
-                    };
-                    await userManager.CreateAsync(newAdminUser, "A1123@email.com");
-                    await userManager.AddToRoleAsync(newAdminUser, UserRoles.Admin);
-                }
+                //var adminUser = await userManager.FindByEmailAsync(UserMail);
+                //if (adminUser == null)
+                //{
+                //    var newAdminUser = new AppUser()
+                //    {
+                //        UserName = "Yurii",
+                //        Email = "123@email.com",
+                //    };
+                //    await userManager.CreateAsync(newAdminUser, "A1123@email.com");
+                //    await userManager.AddToRoleAsync(newAdminUser, UserRoles.Admin);
+                //}
 
 
                 //FirstUser
-                string firstUserMail = "321@email.com";
-
+                string firstUserMail = "zxc@email.com";
+                var firstUser = await userManager.FindByEmailAsync(firstUserMail);
                 var newfirstUser = new AppUser()
                 {
-                    UserName = "Oleg",
-                    Email = "@email.com",
+                    UserName = "Yurii",
+                    Email = "zxc@email.com",
                 };
-
-                var firstUser = await userManager.FindByEmailAsync(firstUserMail);
                 if (firstUser == null)
                 {
- 
                     await userManager.CreateAsync(newfirstUser, "A1123@email.com");
                     await userManager.AddToRoleAsync(newfirstUser, UserRoles.User);
                 }
 
-                //SecondUser
-                string secondUserMail = "qwe@email.com";
 
-                var newSecondUser = new AppUser()
-                {
-                    UserName = "Olya",
-                    Email = "qwe@email.com",
-                };
-
+                string secondUserMail = "asd@email.com";
                 var secondUser = await userManager.FindByEmailAsync(secondUserMail);
+                var newsecondUser = new AppUser()
+                {
+                    UserName = "Yurii",
+                    Email = "asd@email.com",
+                };
                 if (secondUser == null)
                 {
-                    await userManager.CreateAsync(newSecondUser, "A1123@email.com");
-                    await userManager.AddToRoleAsync(newSecondUser, UserRoles.Admin);
+                    await userManager.CreateAsync(newsecondUser, "A1123@email.com");
+                    await userManager.AddToRoleAsync(newsecondUser, UserRoles.User);
                 }
 
                 var context = serviceScope.ServiceProvider.GetService<AppDbContext>();
 
-                context.Database.EnsureCreated();
+                //context.Database.EnsureCreated();
 
-                if (!context.CourseRecipes.Any())
+                if (context.CourseRecipes.Any())
                 {
-                    context.CourseRecipes.AddRange(new List<CourseRecipes>()
-                    {
+                    context.CourseRecipes.Add(
 
                         new CourseRecipes
                         {
-                            Course = new Course{ 
-                                Name = "Українська кухня",
-                                DateTime = new DateTime(1, 1, 1, 1, 30,0),
-                                Description ="Підчас курсу ви навчителя готувати страви української кухні",  
-                                UserCourses = new List<UserCourses>()
-                                {
-                                    new UserCourses
-                                    {
-                                        AppUser = newfirstUser,
-                                    }
-                                }
-                            },
-                            Recipes = new Recipes
-                            {
-                                Name = "Борщ",
-                                Description = "Рецепт смачного борщу",
-                                ImageUrl = "https://images.immediate.co.uk/production/volatile/sites/30/2021/03/borscht-recipe-ab000dc.jpg?quality=90&resize=556,505",
-                                Coments = new List<Coments>()
-                                {
-                                    new Coments
-                                    {
-                                        AppUser= newfirstUser,
-                                        Description = "Дуже смачна, дякую."
-                                    },
-                                    new Coments
-                                    {
-                                        AppUser= newSecondUser,
-                                        Description = "Нвгодувала всю ролдину."
-                                    }
-                                }
-                            },
-                        },
-
-                        new CourseRecipes
-                        {
-                            Course = new Course{
+                            Course = new Course {
                                 Name = "Як приготувати смачні вареники",
-                                DateTime = new DateTime(1, 1, 1, 1, 30,0),
-                                Description ="Р результаті вийдуть дуже смачні вареники",
+                                DateTime = new DateTime(1, 1, 1, 1, 15, 0),
+                                Description = "Р результаті вийдуть дуже смачні вареники",
                                 UserCourses = new List<UserCourses>()
                                 {
                                     new UserCourses
                                     {
-                                        AppUser = newSecondUser,
+                                        AppUser = newsecondUser,
                                     }
                                 }
                             },
                             Recipes = new Recipes
                             {
                                 Name = "Вареники",
-                                Description = "Рецепт вареників\n ",
+                                Description = "Рецепт вареників",
                                 ImageUrl = "https://cdn1.ozonusercontent.com/s3/club-storage/images/article_image_1632x1000/68/f5417e4f-70d5-4c8e-891c-591448bc5cfa.jpeg",
                                 Coments = new List<Coments>()
                                 {
@@ -140,12 +99,26 @@ namespace Coocing.Data
                                     },
                                     new Coments
                                     {
-                                        AppUser= newSecondUser,
+                                        AppUser= newsecondUser,
                                         Description = "Нвгодувала всю ролдину."
                                     }
                                 }
-                            },
-                        }
+                            }
+
+                        });
+                    context.Recipes.Add(new Recipes
+                    {
+                        Name = "Холодець",
+                        Description = "Рецепт драглів\n ",
+                        ImageUrl = "https://ukr.media/static/ba/aimg/4/0/1/401712_1.jpg",
+                        Coments = new List<Coments>()
+                                {
+                                    new Coments
+                                    {
+                                        AppUser= newfirstUser,
+                                        Description = "Супер!!!"
+                                    },
+                                }
                     });
                     context.SaveChanges();
                 }

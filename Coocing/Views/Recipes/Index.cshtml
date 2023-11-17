@@ -7,17 +7,16 @@
 <section class="space-sm flush-with-above">
     <div class="container">
         <ul class="row feature-list feature-list-sm">
-            @* @foreach (var club in Model) *@
-            @for (int i = 0; i < 10; i++)
+            @foreach (var item in Model)
             {
                 <li class="col-12 col-md-6 col-lg-4" style="list-style-type: none;">
                     <div class="card">
-                        <a type="button" asp-controller="Recipes" asp-action="Details" asp-route-id="1">
-                            <img class="card-img-top" src="https://images.immediate.co.uk/production/volatile/sites/30/2021/03/borscht-recipe-ab000dc.jpg?quality=90&resize=556,505" alt="Card image cap">
+                        <a type="button" asp-controller="Recipes" asp-action="Details" asp-route-id="@item.Id">
+                            <img height="300px" class="card-img-top" src="@item.ImageUrl" alt="Card image cap">
                         </a>
                         <div class="card-body">
-                            <h4 class="card-title">Борщ</h4>
-                            <p class="card-text">Смачно шо капець</p>
+                            <h4 class="card-title">@item.Name</h4>
+                            <p class="card-text">@item.Description</p>
                         </div>
 @*                         <div class="card-footer card-footer-borderless d-flex justify-content-between">
                             @if (isAuthenticated && User.IsInRole("admin"))

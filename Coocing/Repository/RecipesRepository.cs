@@ -32,6 +32,7 @@ namespace Coocing.Repository
                                    Description = recipes.Description,
                                    ImageUrl = recipes.ImageUrl,
                                }).FirstOrDefaultAsync();
+            //var recipe = await _context.Recipes.Where(r => r.Id == id).FirstOrDefaultAsync();
             var model = new RecipesViewModel
             {
                 Id= query.Id,
@@ -44,31 +45,8 @@ namespace Coocing.Repository
         }
         public async Task<List<Recipes>> GetAllRecipesAsync()
         {
-            var query = await (from recipe in _context.Recipes
-                               select new
-                               {
-                                   Id = recipe.Id,
-                                   Name = recipe.Name,
-                                   Description = recipe.Description,
-                                   ImageUrl = recipe.ImageUrl,
-                               }).ToListAsync();
-
             var model = await _context.Recipes.ToListAsync();
-            return model;
-        }
-        public async Task<List<Recipes>> GetAllRecipesAsync(string name)
-        {
-            var query = await (from recipe in _context.Recipes
-                               where recipe.Name == name
-                               select new
-                               {
-                                   Id = recipe.Id,
-                                   Name = recipe.Name,
-                                   Description = recipe.Description,
-                                   ImageUrl = recipe.ImageUrl,
-                               }).ToListAsync();
 
-            var model = await _context.Recipes.ToListAsync();
             return model;
         }
 

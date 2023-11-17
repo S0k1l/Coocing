@@ -1,21 +1,32 @@
-﻿using Coocing.ViewModels;
+﻿using Coocing.Interfaces;
+using Coocing.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Coocing.Controllers
 {
     public class RecipesController : Controller
     {
-        [HttpGet]
-        public IActionResult Index()
-        {
+        private readonly IRecipesRepository _recipesRepository;
+        private readonly IComentsRepository _comentsRepository;
 
-            return View();
+        public RecipesController(IRecipesRepository recipesRepository, IComentsRepository comentsRepository)
+        {
+            _recipesRepository = recipesRepository;
+            _comentsRepository = comentsRepository;
+        }
+        [HttpGet]
+        public async Task<IActionResult> Index()
+        {
+            var recipes = await _recipesRepository.GetAllRecipesAsync();
+            return View(recipes);
         }
 
         [HttpGet]
-        public IActionResult Details(int id)
+        public async Task<IActionResult> Details(int id)
         {
-            return View();
+            var model = await _recipesRepository.GetRecipesInfoAsync(id);
+            var coments = _comentsRepository.
+            return View(model);
         }
 
         [HttpGet]

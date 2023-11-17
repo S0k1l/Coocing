@@ -12,5 +12,6 @@ namespace Coocing.Models
         public string ImageUrl { get; set; }
         public ICollection<CourseRecipes> CourseRecipes { get; set; }
         public ICollection<Coments> Coments { get; set; }
+
     }
 }

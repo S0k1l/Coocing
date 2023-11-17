@@ -1,11 +1,15 @@
 using Coocing.Data;
+using Coocing.Interfaces;
 using Coocing.Models;
+using Coocing.Repository;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddScoped<IRecipesRepository, RecipesRepository>();
+builder.Services.AddScoped<IComentsRepository, ComentsRepository>();
 builder.Services.AddDbContext<AppDbContext>(e =>
     e.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddIdentity<AppUser, IdentityRole>()
