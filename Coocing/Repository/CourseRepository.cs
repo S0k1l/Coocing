@@ -1,6 +1,8 @@
 ﻿using Coocing.Data;
 using Coocing.Interfaces;
 using Coocing.Models;
+using Coocing.ViewModels;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace Coocing.Repository
@@ -20,7 +22,37 @@ namespace Coocing.Repository
             return Save();
         }
 
+        public async Task<CourseViewModel> GetCourseInfo(int id)
+        {
 
+            var query = await (from course in _context.Course
+                               join courseRecipe in _context.CourseRecipes on course.Id equals courseRecipe.CourseId
+                               join recipe in _context.Recipes on courseRecipe.RecipesId equals recipe.Id
+                               where course.Id == 1
+                               select new
+                               {
+                                   CourseName = course.Name,
+                                   CourseDateTime = course.DateTime,
+                                   CourseDescription = course.Description,
+                                   RecipeName = recipe.Name,
+                                   RecipeDescription = recipe.Description,
+                                   ImageUrl = recipe.ImageUrl
+                               }).FirstOrDefaultAsync();//.ToListAsync();
+
+          //  var courses = await _context.Course.ToListAsync();
+
+
+            var model = new CourseViewModel
+            {
+                Name = query.CourseName,
+
+
+
+
+            };
+            return model;
+
+        }
 
         public bool Save()
         {
