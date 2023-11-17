@@ -56,6 +56,21 @@ namespace Coocing.Repository
             var model = await _context.Recipes.ToListAsync();
             return model;
         }
+        public async Task<List<Recipes>> GetAllRecipesAsync(string name)
+        {
+            var query = await (from recipe in _context.Recipes
+                               where recipe.Name == name
+                               select new
+                               {
+                                   Id = recipe.Id,
+                                   Name = recipe.Name,
+                                   Description = recipe.Description,
+                                   ImageUrl = recipe.ImageUrl,
+                               }).ToListAsync();
+
+            var model = await _context.Recipes.ToListAsync();
+            return model;
+        }
 
         public bool Save()
         {

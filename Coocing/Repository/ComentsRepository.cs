@@ -21,11 +21,10 @@ namespace Coocing.Repository
             return Save();
         }
 
-        public async Task<List<Coments>> GetAllComentsAsync(int comentId)
+        public async Task<List<Coments>> GetAllComentsAsync()
         {
             var query = await (from coments in _context.Coments
                                join recipes in _context.Recipes on coments.Id equals recipes.Id
-                               where recipes.Id == comentId
                                select new
                                {
                                    RecipesName = recipes.Name,
@@ -38,7 +37,29 @@ namespace Coocing.Repository
             var model = await _context.Coments.ToListAsync();
             return model;
         }
-
+        public async Task<Coments> GetComentsAsync(int id)
+        {
+            var query = await (from coments in _context.Coments
+                               join recipes in _context.Recipes on coments.Id equals recipes.Id
+                               where recipes.Id == id
+                               select new
+                               {
+                                   RecipesName = recipes.Name,
+                                   RecipeId = recipes.Id,
+                                   RecipesImageUrl = recipes.ImageUrl,
+                                   ComentsId = coments.Id,
+                                   ComentsDescription = coments.Description,
+                                   ComentsUserId = coments.AppUserId,
+                               }).FirstOrDefaultAsync();
+            var model = new Coments
+            {
+                Id = query.ComentsId,
+                Description = query.ComentsDescription,
+                AppUserId = query.ComentsUserId,
+                RecipesId = query.RecipeId,
+            };
+            return model;
+        }
 
 
         public bool Save()

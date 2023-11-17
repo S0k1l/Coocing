@@ -28,7 +28,7 @@ namespace Coocing.Repository
             var query = await (from course in _context.Course
                                join courseRecipe in _context.CourseRecipes on course.Id equals courseRecipe.CourseId
                                join recipe in _context.Recipes on courseRecipe.RecipesId equals recipe.Id
-                               where course.Id == 1
+                               where course.Id == id
                                select new
                                {
                                    CourseName = course.Name,
