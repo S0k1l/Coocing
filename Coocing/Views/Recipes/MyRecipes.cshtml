@@ -10,7 +10,7 @@
 
 <section class="space-sm flush-with-above">
     <div class="frame">
-        <a class="btn btn-primary" asp-controller="Statements" asp-action="MyStatements">Мої заяви</a>
+        <a class="btn btn-primary" asp-controller="Recipes" asp-action="CreateRecipe">Мої заяви</a>
     </div>
     @if (Model != null && Model.Count() > 0)
     {
@@ -28,6 +28,19 @@
                                 <p class="card-text">@item.Description</p>
                             </div>                        
                         </div>
+                        <div class="card-footer card-footer-borderless d-flex justify-content-between">
+@*                             @if (isAuthenticated)
+                            { *@
+                                <div>
+                                    <a type="button" class="btn btn-sm btn-outline-info" asp-controller="Recipes" asp-action="Edit" asp-route-id="1">
+                                        Редагувати
+                                    </a>
+                                    <a type="button" class="btn btn-sm btn-outline-danger" asp-controller="Club" asp-action="Delete" asp-route-id="1">
+                                        Delete
+                                    </a>
+                                </div>
+@*                             } *@
+                            </div>
                         <br />
                     </li>
                 }

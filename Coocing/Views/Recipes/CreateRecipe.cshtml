@@ -1,0 +1,52 @@
+﻿@using Coocing.ViewModels;
+
+@model CreateRecipesViewModel
+
+@{
+    ViewData["Title"] = "Подати";
+}
+
+<head>
+    <link rel="stylesheet" href="/css/site.css">
+</head>
+
+<div class="row">
+    <div class="col-md-6 offset-3">
+        <p>
+            <h2>Створеня рецепту</h2>
+        </p>
+        @if (TempData["Error"] != null)
+        {
+            <div class="col-md-12 alert alert-danger">
+                <span><b>Sorry!</b> - @TempData["Error"]</span>
+            </div>
+        }
+        <div class="row">
+            <div class="col-md-8 offset-2">
+                <form asp-action="CreateRecipes" asp-controller="Recipes" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div><br />
+                    <div class="form-group">
+                        <label asp-for="Name" class="control-label">Вкажіть назву страви</label>
+                        <input asp-for="Name" class="form-control">
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div><br />
+                    <div class="form-group">
+                        <textarea asp-for="Description" rows="5" class="form-control" placeholder="Коротко опишіть страву, вкажуть інградієнти та те як її приготувати"></textarea>
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div><br />
+                    <div class="form-group">
+                        <label asp-for="Image">Завантажте фото вашої страви</label>
+                        <input asp-for="Image" type="file" class="form-control" placeholder="Фото">
+                        <span asp-validation-for="Image" class="text-danger"></span>
+                    </div><br />
+                    <div class="form-group">
+                        <form method="post" class="form-inline" asp-controller="Recipes" asp-action="CreateRecipes">
+                            <button class="btn btn-success float right" asp-controller="Recipes" asp-action="CreateRecipes">Створити</button>
+                        </form>
+                        <a class="btn btn-outline-secondary" asp-controller="Recipes" asp-action="MyRecipes">Назад</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

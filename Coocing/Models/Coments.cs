@@ -14,6 +14,5 @@ namespace Coocing.Models
         [ForeignKey("Recipes")]
         public int RecipesId { get; set; }
         public Recipes Recipes { get; set; }
-
     }
 }

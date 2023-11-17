@@ -34,6 +34,16 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Конфіденційність</a>
                         </li>
+                        <li class="nav-item">
+                            <select class="form-select" style="border-radius: 20px; margin-top: 2px" name="cars" id="cars">
+                                <option  value="volvo">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Recipes" asp-action="MyRecipe">Конфіденційність</a>
+                                </option>
+                                <option value="saab">Saab</option>
+                                <option value="mercedes">Mercedes</option>
+                                <option value="audi">Audi</option>
+                            </select>
+                        </li>
                         @if (SignInManager.IsSignedIn(User))
                         {
                             <li class="nav-item">

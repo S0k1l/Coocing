@@ -33,8 +33,21 @@ namespace Coocing.Controllers
         [HttpPost]
         public IActionResult CreateRecipe(RecipesViewModel model)
         {
-
             return View();
         }
+
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Edit(int id, RecipesViewModel model)
+        {
+            return View();
+        }
+
+
     }
 }
