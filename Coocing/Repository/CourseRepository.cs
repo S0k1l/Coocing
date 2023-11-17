@@ -22,38 +22,53 @@ namespace Coocing.Repository
             return Save();
         }
 
-        public async Task<CourseViewModel> GetCourseInfo(int id)
+        public async Task<List<Course>> GetAllCourses()
         {
 
             var query = await (from course in _context.Course
                                join courseRecipe in _context.CourseRecipes on course.Id equals courseRecipe.CourseId
-                               join recipe in _context.Recipes on courseRecipe.RecipesId equals recipe.Id
-                               where course.Id == 1
+                               join recipe in _context.Recipes on courseRecipe.RecipesId equals recipe.Id                               where course.Id == 1
+
                                select new
                                {
+                                   RecipesId = recipe.Id,
                                    CourseName = course.Name,
                                    CourseDateTime = course.DateTime,
                                    CourseDescription = course.Description,
                                    RecipeName = recipe.Name,
                                    RecipeDescription = recipe.Description,
                                    ImageUrl = recipe.ImageUrl
-                               }).FirstOrDefaultAsync();//.ToListAsync();
+                               }).ToListAsync();
 
-          //  var courses = await _context.Course.ToListAsync();
+         var courses = await _context.Course.ToListAsync();
 
+            return courses;
 
-            var model = new CourseViewModel
+        }
+        public async Task<Course> GetCourseInfoAsync(int id)
+        {
+
+            var query = await (from course in _context.Course
+                               where course.Id == id
+                               select new
+                               {
+                                   Id = course.Id,
+                                   Name = course.Name,
+                                   DateTime = course.DateTime,
+                                   Description = course.Description,
+                               }).FirstOrDefaultAsync();
+
+            var model = new Course
             {
-                Name = query.CourseName,
-
-
-
-
+                Id = query.Id,
+                Name = query.Name,
+                DateTime = query.DateTime,
+                Description = query.Description,
             };
+
             return model;
 
         }
-
         public bool Save()
         {
             var saved = _context.SaveChanges();
