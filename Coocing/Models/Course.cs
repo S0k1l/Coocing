@@ -9,7 +9,7 @@ namespace Coocing.Models
         public string Name { get; set; }
         public DateTime DateTime { get; set; }
         public string Description { get; set; }
-        public ICollection<UserCourses> Courses { get; set; }
+        public ICollection<UserCourses> UserCourses { get; set; }
         public ICollection<CourseRecipes> CourseRecipes { get; set; }
     }
 }
