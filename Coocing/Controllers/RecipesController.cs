@@ -24,12 +24,8 @@ namespace Coocing.Controllers
         [HttpGet]
         public async Task<IActionResult> Details(int id)
         {
-            var recipes = await _recipesRepository.GetRecipesInfoAsync(id);
-            //var coments = _comentsRepository
-            var model = new RecipesDetailsViewModel
-            {
-                Recipes = recipes,
-            };
+            var model = await _recipesRepository.GetRecipesInfoAsync(id);
+            var coments = _comentsRepository.
             return View(model);
         }
 
