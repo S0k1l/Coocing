@@ -21,23 +21,23 @@ namespace Coocing.Repository
             return Save();
         }
 
-        public async Task<List<Coments>> GetAllComentsAsync(int recipeId)
+        public async Task<List<Coments>> GetAllComentsAsync(int comentId)
         {
             var query = await (from coments in _context.Coments
-                               join recipes in _context.Recipes on coments.Id equals recipes.Id    
-                               join user in _context.Users on coments.AppUserId equals user.Id
-                               where coments.RecipesId == recipeId
+                               join recipes in _context.Recipes on coments.Id equals recipes.Id
+                               where recipes.Id == comentId
                                select new
                                {
-                                   UserName = user.UserName,
+                                   RecipesName = recipes.Name,
+                                   RecipeId = recipes.Id,
+                                   RecipesImageUrl = recipes.ImageUrl,
                                    ComentsId = coments.Id,
                                    ComentsDescription = coments.Description,
-
+                                   ComentsUserId = coments.AppUserId,
                                }).ToListAsync();
             var model = await _context.Coments.ToListAsync();
             return model;
         }
-
 
 
 
