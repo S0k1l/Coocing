@@ -21,11 +21,23 @@ namespace Coocing.Controllers
             return View(recipes);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Index(string Name)
+        {
+            var recipes = await _recipesRepository.GetRecipesByName(Name);
+            return View(recipes);
+        }
+
         [HttpGet]
         public async Task<IActionResult> Details(int id)
         {
-            var model = await _recipesRepository.GetRecipesInfoAsync(id);
-            var coments = _comentsRepository.
+            var recipes = await _recipesRepository.GetRecipesInfoAsync(id);
+            var coments = await _comentsRepository.GetAllComentsAsync(id);
+            var model = new RecipesDetailsViewModel
+            {
+                Recipes = recipes,
+                Coments = coments,
+            };
             return View(model);
         }
 

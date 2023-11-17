@@ -2,9 +2,8 @@
 {
     public class ComentsViewModel
     {
-        public int Id { get; set; }
-        public string Description { get; set; }
-        public string AppUserId { get; set; }
-        public int RecipesId { get; set; }
+        public string UserName { get; set; }
+        public string Text { get; set; }
+        public int ComentId { get; set; }
     }
 }

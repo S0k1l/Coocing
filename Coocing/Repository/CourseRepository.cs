@@ -24,26 +24,15 @@ namespace Coocing.Repository
 
         public async Task<List<Course>> GetAllCourses()
         {
-
-            var query = await (from course in _context.Course
-                               join courseRecipe in _context.CourseRecipes on course.Id equals courseRecipe.CourseId
-                               join recipe in _context.Recipes on courseRecipe.RecipesId equals recipe.Id                               where course.Id == 1
-
-                               select new
-                               {
-                                   RecipesId = recipe.Id,
-                                   CourseName = course.Name,
-                                   CourseDateTime = course.DateTime,
-                                   CourseDescription = course.Description,
-                                   RecipeName = recipe.Name,
-                                   RecipeDescription = recipe.Description,
-                                   ImageUrl = recipe.ImageUrl
-                               }).ToListAsync();
-
          var courses = await _context.Course.ToListAsync();
+            return courses;
+        }
+
+        public async Task<List<Course>> GetCoursesByName(string name)
+        {
+            var courses = await _context.Course.Where(c => c.Name.ToLower().Contains(name.ToLower())).ToListAsync();
 
             return courses;
-
         }
         public async Task<Course> GetCourseInfoAsync(int id)
         {

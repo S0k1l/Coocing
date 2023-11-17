@@ -1,8 +1,8 @@
 ﻿@using Coocing.ViewModels;
-@model RecipesViewModel
+@model RecipesDetailsViewModel
 
 @{
-    ViewData["Title"] = Model.Name;
+    ViewData["Title"] = Model.Recipes.Name;
 }
 
 <head>
@@ -15,28 +15,41 @@
     <!-- Portfolio Item Heading -->
     <h1 class="my-4">
         <b>
-        @Model.Name
+            @Model.Recipes.Name
         </b>
     </h1>
 
     <!-- Portfolio Item Row -->
     <div class="row">
 
-        <div class="col-md-8">
-            <img width="550px" class="img-fluid" src="@Model.ImageUrl" alt="">
+        <div class="col-md-6">
+            <img width="550" class="img-fluid" src="@Model.Recipes.ImageUrl" style="border-radius: 10px" alt="">
         </div>
 
-        <div class="col-md-4">
+        <div class="col-4">
             <h2 class="my-3"><b>Опис</b></h2>
-            <h4>@Model.Description</h4>
+            <h4>@Model.Recipes.Description</h4>
         </div>
-
-    </div>
+    </div> <br />
     <!-- /.row -->
     <!-- Related Projects Row -->
-    <h3 class="my-4">Інші рецепти</h3>
 
     <div class="row">
+        <div class="col-md-8 offset-2">
+            <h3 class="my-4">Коментарі:</h3>
+            @foreach (var item in Model.Coments)
+            {
+                <div class="card">
+                    <div class="card-header"><h4 class="card-title">@item.UserName</h4></div>
+                    <div class="card-body">
+                        <p class="card-text">@item.Text</p>
+                    </div>
+                </div><br/>
+            }
+        </div>
+    </div>
+
+    @* <div class="row">
 
         <div class="col-md-3 col-sm-6 mb-4">
             <a href="#">
@@ -60,7 +73,7 @@
             <a href="#">
                 <img class="img-fluid" src="https://via.placeholder.com/500x300" alt="">
             </a>
-        </div>
+        </div> *@
 
     </div>
     <!-- /.row -->

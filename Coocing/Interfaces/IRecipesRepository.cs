@@ -6,6 +6,7 @@ namespace Coocing.Interfaces
     public interface IRecipesRepository
     {
         Task<List<Recipes>> GetAllRecipesAsync();
+        Task<List<Recipes>> GetRecipesByName(string nmae);
         Task<RecipesViewModel> GetRecipesInfoAsync(int id);
         bool Add(Recipes recipes);
         bool Save();

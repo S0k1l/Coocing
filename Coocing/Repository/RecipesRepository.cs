@@ -41,7 +41,12 @@ namespace Coocing.Repository
                 ImageUrl = query.ImageUrl,
             };
             return model;
+        }
 
+        public async Task<List<Recipes>> GetRecipesByName(string nmae)
+        {
+            var recipes = await _context.Recipes.Where(r => r.Name.ToLower().Contains(nmae.ToLower())).ToListAsync();
+            return recipes;
         }
         public async Task<List<Recipes>> GetAllRecipesAsync()
         {

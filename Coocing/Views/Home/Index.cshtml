@@ -1,43 +1,66 @@
-﻿@model IEnumerable<Recipes>
+﻿@using Coocing.ViewModels;
+@model HomeViewModel
 
 @{
     bool isAuthenticated = User.Identity?.IsAuthenticated == true;
 }
 
+<style>
+    #myClass {
+        color: black;
+        text-decoration: none,
+    }
+
+    .myClass {
+        color: black;
+        text-decoration: none,
+    }
+
+        .myClass:hover {
+            /* put whatever styling you want when someone hovers over the link */
+        }
+</style>
+
 <section class="space-sm flush-with-above">
     <div class="container">
+        <h1>Курси</h1><br />
         <ul class="row feature-list feature-list-sm">
-            @foreach (var item in Model)
+            @foreach (var item in Model.Courses)
             {
                 <li class="col-12 col-md-6 col-lg-4" style="list-style-type: none;">
                     <div class="card">
-                        <a type="button" asp-controller="Recipes" asp-action="Details" asp-route-id="@item.Id">
-                            <img height="300px" class="card-img-top" src="@item.ImageUrl" alt="Card image cap">
-                        </a>
                         <div class="card-body">
-                            <h4 class="card-title">@item.Name</h4>
-                            <p class="card-text">@item.Description</p>
+                            <a type="button" class="myClass" asp-controller="Recipes" asp-action="Details" asp-route-id="@item.Id">
+                                <h4 class="card-title">@item.Name</h4>
+                                <p class="myClass">@item.Description</p>
+                            </a>
                         </div>
-                        @*                         <div class="card-footer card-footer-borderless d-flex justify-content-between">
-                    @if (isAuthenticated && User.IsInRole("admin"))
-                    {
-                    <div>
-                    <a type="button" class="btn btn-sm btn-outline-info" asp-controller="Club" asp-action="Edit" asp-route-id="@club.Id">
-                    Edit
-                    </a>
-                    <a type="button" class="btn btn-sm btn-outline-danger" asp-controller="Club" asp-action="Delete" asp-route-id="@club.Id">
-                    Delete
-                    </a>
-                    </div>
-                    }
-                    <div>
-                    <small>@club.</small>
-                    </div>
-                    </div> *@
                     </div>
                     <br />
                 </li>
             }
         </ul>
     </div>
+</section>
+<section class="space-sm flush-with-above">
+<div class="container">
+    <h1>Рецепти</h1><br />
+    <ul class="row feature-list feature-list-sm">
+        @foreach (var item in Model.Recipes)
+        {
+            <li class="col-12 col-md-6 col-lg-4" style="list-style-type: none;">
+                <div class="card">
+                    <a type="button" asp-controller="Recipes" asp-action="Details" asp-route-id="@item.Id">
+                        <img height="300px" class="card-img-top" src="@item.ImageUrl" alt="Card image cap">
+                    </a>
+                    <div class="card-body">
+                        <h4 class="card-title">@item.Name</h4>
+                        <p class="card-text">@item.Description</p>
+                    </div>
+                </div>
+                <br />
+            </li>
+        }
+    </ul>
+</div>
 </section>

@@ -1,6 +1,7 @@
 ﻿using Coocing.Data;
 using Coocing.Interfaces;
 using Coocing.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Coocing.Repository
 {
@@ -13,12 +14,11 @@ namespace Coocing.Repository
             _context = context;
         }
 
-        public bool Add(CourseRecipes courseRecipes )
+        public bool Add(CourseRecipes courseRecipes)
         {
             _context.Add(courseRecipes);
             return Save();
         }
-
 
 
         public bool Save()
