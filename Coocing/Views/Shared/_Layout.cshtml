@@ -21,7 +21,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Recipes" asp-action="Index">Cooking</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Cooking</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -29,39 +29,44 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Recipes" asp-action="Index">Головна</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Головна</a>
                         </li>
-                        <li class="nav-item">
+@*                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Конфіденційність</a>
+                        </li> *@
+                        <li class="nav-item" style="margin-right: 10px">
+                            <select class="form-select" style="border-radius: 20px; margin-top: 2px; " name="cars" id="cars">
+                                <option  value="volvo">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Recipes" asp-action="MyRecipe">Курси</a>
+                                </option>
+                            </select>
                         </li>
                         <li class="nav-item">
                             <select class="form-select" style="border-radius: 20px; margin-top: 2px" name="cars" id="cars">
-                                <option  value="volvo">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Recipes" asp-action="MyRecipe">Конфіденційність</a>
+                                <option value="volvo">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Recipes" asp-action="MyRecipe">Рецепти</a>
                                 </option>
-                                <option value="saab">Saab</option>
-                                <option value="mercedes">Mercedes</option>
-                                <option value="audi">Audi</option>
                             </select>
                         </li>
+                    </ul>
                         @if (SignInManager.IsSignedIn(User))
                         {
-                            <li class="nav-item">
+                            <div class="nav-item">
                                 <form id="logoutForm" method="post" class="form-inline" asp-controller="Account" asp-action="LogOff">
                                     <button type="submit" class="btn nav-link">Вийти</button>
                                 </form>
-                            </li>
+                            </div>
                         }
                         else
                         {
-                            <li class="nav-item">
+                            <div class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Увійти</a>
-                            </li>
-                            <li class="nav-item">
+                            </div>
+                        <div class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">Зареєструватися</a>
-                            </li>
+                            </div>
                         }
-                    </ul>
+                    
                 </div>
             </div>
         </nav>

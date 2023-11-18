@@ -26,9 +26,16 @@ namespace Coocing.Controllers
         }
 
         [HttpGet]
-        public IActionResult Details()
+        public async Task<IActionResult> Details(int id)
+        {
+            var model = await _courseRepository.GetCourseInfoAsync(id);
+            return View(model);
+        }
+        [HttpGet]
+        public async Task<IActionResult> Registration(int id)
         {
             return View();
         }
+
     }
 }

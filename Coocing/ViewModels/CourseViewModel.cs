@@ -1,4 +1,6 @@
-﻿namespace Coocing.ViewModels
+﻿using Coocing.Models;
+
+namespace Coocing.ViewModels
 {
     public class CourseViewModel
     {
@@ -6,5 +8,7 @@
         public string Name { get; set; }
         public DateTime DateTime { get; set; }
         public string Description { get; set; }
+        public List<Recipes> Recipes { get; set; }
+
     }
 }

@@ -1,5 +1,48 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@using Coocing.ViewModels;
+@model CourseViewModel
+
 @{
+    ViewData["Title"] = Model.Name;
 }
+
+<head>
+    <link rel="stylesheet" href="/css/site.css">
+</head>
+
+<!-- Page Content -->
+<div class="container">
+
+    <!-- Portfolio Item Heading -->
+    <h1 class="my-4">
+        <b>
+            @Model.Name
+        </b>
+    </h1>
+
+    <!-- Portfolio Item Row -->
+    <div class="row">
+        <div class="col-4">
+            <h2 class="my-3"><b>Опис</b></h2>
+            <h4>@Model.Description</h4>
+            <h2 class="my-3"><b>Рецепти в цьому курсі</b></h2>
+            <ul>           
+                @foreach (var item in Model.Recipes)
+                {
+                    <li>
+                        <a type="button" class="myClass" asp-controller="Recipes" asp-action="Details" asp-route-id="@item.Id">
+                            <h4 class="card-title">@item.Name</h4>
+                        </a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div> <br />
+    <div class="form-group">
+        <a type="button" class="btn btn-success" asp-controller="Course" asp-action="Registration" asp-route-id="@Model.Id">
+            <h4 class="card-title">Зареєструватися</h4>
+        </a>
+    </div>
+</div>
+<!-- /.row -->
+</div>
+<!-- /.container -->

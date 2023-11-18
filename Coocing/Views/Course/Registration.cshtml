@@ -1,0 +1,46 @@
+﻿@using Coocing.ViewModels;
+
+@model CourseRegistrationViewModel;
+
+
+@{
+    ViewData["Title"] = "Реєстрація на курс";
+}
+
+<div class="row">
+    <div class="col-md-6 offset-3">
+        <p>
+            <h2><b>Зареєструйтесь на курс</b></h2>
+        </p><br />
+
+        @if (TempData["Error"] != null)
+        {
+            <div class="col-md-12 alert alert-danger">
+                <span><b>Sorry!</b> - @TempData["Error"] </span>
+            </div>
+        }
+
+        <div class="row">
+            <div class="col-md-8 offset-2">
+                <h4>Заповніть поля</h4>
+                <form asp-action="Register">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="FullName" class="control-label"></label>
+                        <input asp-for="FullName" class="form-control" />
+                        <span asp-validation-for="FullName" class="text-danger"></span>
+                    </div><br />
+                    <div class="form-group">
+                        <label asp-for="PhoneNumber" class="control-label"></label>
+                        <input asp-for="PhoneNumber" class="form-control" />
+                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                    </div><br />
+                    <div class="form-group">
+                        <input class="btn btn-success float-right" type="submit" value="Зареєструватися" />
+                        <a class="btn btn-outline-secondary" asp-controller="Home" asp-action="Index">Скасувати</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
